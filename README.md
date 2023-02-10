@@ -1,3 +1,7 @@
+[![Documentation Status](https://readthedocs.org/projects/ariston-boiler-control/badge/?version=latest)](https://ariston-boiler-control.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/ariston-boiler-control.svg)](https://badge.fury.io/py/ariston-boiler-control)
+![License - Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-brightgreen)
+
 ## ariston_boiler_control
 
 Module for the control of a Wifi-enabled Ariston boiler through the Web API.
