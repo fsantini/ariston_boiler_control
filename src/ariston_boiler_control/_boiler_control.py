@@ -12,8 +12,6 @@ DATA_SUFFIX = '?fetchSettings=true&fetchTimeProg=true&rnd='
 
 SET_DATA_URL = BASE_URL + '/R2/PlantHomeSlp/SetData/'
 
-POLL_INTERVAL = 30
-
 
 class OperationMode(IntEnum):
     """
@@ -59,11 +57,13 @@ class AristonBoilerControl:
     Attributes:
         email (str): the email address used to login to the Ariston website
         password (str): the password used to login to the Ariston website
+        poll_interval (int, optional): the interval in seconds between polling for new data (default 30)
     """
-    def __init__(self, email, password):
+    def __init__(self, email, password, poll_interval=30):
         self.email = email
         self.password = password
         self.session = requests.session()
+        self.poll_interval = poll_interval
         self.boiler_id = None
         self.last_data = None
         self.last_data_time = None
@@ -117,7 +117,7 @@ class AristonBoilerControl:
         """
         if not force and \
                 self.last_data_time is not None and \
-                time.time() - self.last_data_time < POLL_INTERVAL:
+                time.time() - self.last_data_time < self.poll_interval:
             return self.last_data
 
         if self.boiler_id is None:
