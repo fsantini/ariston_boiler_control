@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 /test_connection.py
 /ariston_read_values.txt
+/test.py

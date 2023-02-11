@@ -133,6 +133,10 @@ class AristonBoilerControl:
         if data_request.status_code != 200:
             raise ConnectionError('Error getting data')
 
+        data = data_request.json()
+        if not data['ok'] or 'data' not in data:
+            raise ConnectionError('Error getting data')
+
         self.last_data = data_request.json()
         self.last_data_time = time.time()
 
@@ -259,8 +263,8 @@ class AristonBoilerControl:
         ConnectionError
             If there is a problem connecting to the website
         """
-        set_data_url = SET_DATA_URL + self.boiler_id
         payload = self._populate_set_object(**kwargs)
+        set_data_url = SET_DATA_URL + self.boiler_id
         set_data_request = self.session.post(set_data_url, json=payload)
         if set_data_request.status_code != 200:
             raise ConnectionError('Error setting data')
