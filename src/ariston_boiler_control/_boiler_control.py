@@ -206,6 +206,22 @@ class AristonBoilerControl:
         """
         return self.get_data_raw(force)['data']['plantData']['boostOn']
 
+    def get_operation_mode(self, force: bool = False) -> OperationMode:
+        """
+        Get the current operation mode
+
+        Parameters
+        ----------
+        force : bool, optional
+            if polling for a new value is required, by default False
+
+        Returns
+        -------
+        OperationMode
+            A OperationMode enum corresponding to the current state
+        """
+        return OperationMode(self.get_data_raw(force)['data']['plantData']['opMode'])
+
     def _populate_set_object(self, **kwargs) -> dict:
         """
         Populate the set object with the data from the last get, because this is the format expected by the server.
