@@ -59,11 +59,12 @@ class AristonBoilerControl:
         password (str): the password used to login to the Ariston website
         poll_interval (int, optional): the interval in seconds between polling for new data (default 30)
     """
-    def __init__(self, email, password, poll_interval=30):
+    def __init__(self, email, password, poll_interval=30, quiet_login: bool = False):
         self.email = email
         self.password = password
         self.session = requests.session()
         self.poll_interval = poll_interval
+        self.quiet_login = quiet_login
         self.boiler_id = None
         self.last_data = None
         self.last_data_time = None
@@ -87,7 +88,8 @@ class AristonBoilerControl:
 
         login_result = login_request.json()
         if login_result['ok']:
-            print('Login successful')
+            if not self.quiet_login:
+                print('Login successful')
         else:
             raise AuthenticationError('Login failed')
 
@@ -126,7 +128,8 @@ class AristonBoilerControl:
         data_url = DATA_BASE_URL + self.boiler_id + DATA_SUFFIX + str(int(time.time()))
         data_request = self.session.get(data_url)
         if data_request.status_code == 403:
-            print('Not logged in - retrying login')
+            if not self.quiet_login:
+                print('Not logged in - retrying login')
             self.login()
             data_request = self.session.get(data_url)
 
