@@ -30,6 +30,6 @@ from ._boiler_control import AristonBoilerControl, AuthenticationError, HPState,
 
 __all__ = ['AristonBoilerControl', 'AuthenticationError', 'HPState', 'OperationMode']
 
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 __version__ = VERSION
 
