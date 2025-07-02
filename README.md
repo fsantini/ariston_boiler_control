@@ -22,6 +22,8 @@ Example:
     >>> # executes the login with the username and password provided
     >>> # it is actually optional: it is done automatically when needed
     >>> abc.login()
+    >>> # if you don't need the 'Login successful' message, you can login this way:
+    >>> abc.login(False)
     >>> # get the current temperature
     >>> temperature = abc.get_current_temperature()
     >>> # set the operation mode to comfort
