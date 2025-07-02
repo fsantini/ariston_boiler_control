@@ -19,11 +19,11 @@ Example:
 ```python
     >>> from ariston_boiler_control import AristonBoilerControl, OperationMode
     >>> abc = AristonBoilerControl('email@email.com', 'password')
+    >>> # alternatively, you can use the option `quiet_login` to avoid the 'Login successful' message
+    >>> abc = AristonBoilerControl('email@email.com', 'password', quiet_login=True)
     >>> # executes the login with the username and password provided
     >>> # it is actually optional: it is done automatically when needed
     >>> abc.login()
-    >>> # if you don't need the 'Login successful' message, you can login this way:
-    >>> abc.login(False)
     >>> # get the current temperature
     >>> temperature = abc.get_current_temperature()
     >>> # set the operation mode to comfort
